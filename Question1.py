@@ -75,7 +75,7 @@ def main():
     totalRow=int(input("Enter the number of rows"))
     totalCol=int(input("Enter the number of columns"))
 
-    # taking iput board 
+    # taking input board 
     for i in range(totalRow):
         board.append(input().split(" "))
 
