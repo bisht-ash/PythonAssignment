@@ -56,8 +56,11 @@ class Solution:
         # we changed all the O that can not be visited from any boundary O 
         for i in range(0,self.totalRow):
             for j in range(0,self.totalCol):
-                if(board[i][j]=='*'):
+                if(board[i][j]=='O'):
                     board[i][j]='X'
+                if(board[i][j]=='*'):
+                    board[i][j]='O'
+
 
             
 def main():
