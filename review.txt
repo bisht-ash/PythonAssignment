@@ -1,0 +1,26 @@
+Peer review:
+
+1. Ashish's code
+    * He is using Depth First Search algorithm.
+    * He is traversing all the corner nodes and calling the dfs function when is encounters an 'O'.
+    * In the dfs function he is changing the 'O' he is encountering to '$' and calls the dfs in all four directions.
+    * And he simply return the control from dfs if he runs out of bound or encounters a 'X'.
+    * Finally he changes all the '$' in the board to 'O' and all the 'O' to 'X' prints the board.
+
+    HIS ALGORITHM WORKS FINE.
+
+2. Chakradhar Srinivas's code 
+    * He has used both Depth First Search and Breath First Search.
+    * DFS 
+        * He is traversing all the corner nodes and calling the dfs function when is encounters an 'O'.
+        * In the dfs function he is changing the 'O' he is encountering to 'Y' and calls the dfs in all four directions.
+        * And he simply return the control from dfs if he runs out of bound or encounters a 'X'.
+        * Finally he changes all the 'Y' in the board to 'O' and all the 'O' to 'X' prints the board.
+    * BFS
+        * He is traversing all the corner nodes and pushing them to a queue when is encounters an 'O'.
+        * Now he is running a loop while the queue is not empty
+        * For every iteration he pop the left element and change its value to 'Y'. 
+        * Then for all its four neighbour (if they exist) and are ='O' he has pushed them to the queue.
+        * After the loop is over he changing all 'Y' to 'O' and all the rest all the element 'X'
+
+    BOTH HIS ALOGRITHMS WORK FINE.
