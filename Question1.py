@@ -1,7 +1,5 @@
 from collections import deque 
 class Solution:
-    totalRow=0
-    totalCol=0
     # defined the class constructor to intialize data members 
     def __init__(self,totalRow,totalCol):
         self.totalRow=totalRow
@@ -13,20 +11,13 @@ class Solution:
             return False
         else:
             return True
+
     # solve function which does the main work 
     def solve(self, board):
         # dx and dy are directional list 
         # allows us to travel in all four direction easily 
         dx=[1,0,-1,0]
         dy=[0,1,0,-1]
-        vis=[]
-        # created a 2D list to maintain which index is visited and which is not
-        # by default every element of visited is set to 0 i.e. false
-        for i in range(self.totalRow+1):
-            temp=[]
-            for j in range(self.totalCol+1):
-                temp.append(0)
-            vis.append(temp)
         # created a queue to perform Breath First Search
         bfsQueue=deque()
 
@@ -37,7 +28,7 @@ class Solution:
                 bfsQueue.append([i,0])
             if(board[i][self.totalCol-1]=='O'):
                 bfsQueue.append([i,self.totalCol-1])
-        # we started the loop here from 1 to totalCol -1 so that we don't the corner element twice
+        # we started the loop here from 1 to totalCol -1 so that we don't add the corner element twice
         for i in range(1,self.totalCol-1):
             if(board[0][i]=='O'):
                 bfsQueue.append([0,i])
@@ -51,11 +42,11 @@ class Solution:
         while(len(bfsQueue)):
             # poping the first element 
             x=bfsQueue.popleft()
-            if(vis[x[0]][x[1]]==0):
+            if(board[x[0]][x[1]]=='O'):
                 # if the current O is not visited we mark it as visited 
                 # check all its 4 neighbour if they are O and are not visited 
                 # then push them to the queue
-                vis[x[0]][x[1]]=1
+                board[x[0]][x[1]]='*'
                 for i in range(4):
                     # this loop is to iterate over all 4 neighbour
                     if(self.isSafe(board,x[0]+dx[i],x[1]+dy[i])==True):
@@ -63,9 +54,9 @@ class Solution:
                             bfsQueue.append([x[0]+dx[i],x[1]+dy[i]])
 
         # we changed all the O that can not be visited from any boundary O 
-        for i in range(1,self.totalRow-1):
-            for j in range(1,self.totalCol-1):
-                if(vis[i][j]==0 and board[i][j]=='O'):
+        for i in range(0,self.totalRow):
+            for j in range(0,self.totalCol):
+                if(board[i][j]=='*'):
                     board[i][j]='X'
 
             
