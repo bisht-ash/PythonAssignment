@@ -11,9 +11,20 @@ class Solution:
             return False
         else:
             return True
+        
+    def validateInput(self,board):
+        if(board==[]):
+            raise Exception("Empty Input")
+        else:
+            for row in range(self.totalRow):
+                for col in range(self.totalCol):
+                    # checking if there is something else in the board
+                    if(board[row][col]!='X' and board[row][col]!='O'):
+                        raise Exception("Invalid Input")
+                    
 
-    # solve function which does the main work 
-    def solve(self, board):
+    # flipBoard function which does the main work 
+    def flipBoard(self, board):
         # dx and dy are directional list 
         # allows us to travel in all four direction easily 
         dx=[1,0,-1,0]
@@ -23,17 +34,17 @@ class Solution:
 
         # added all the boundary elements to the queue 
         # we will perform a multi source BFS
-        for i in range(self.totalRow):
-            if(board[i][0]=='O'):
-                bfsQueue.append([i,0])
-            if(board[i][self.totalCol-1]=='O'):
-                bfsQueue.append([i,self.totalCol-1])
+        for row in range(self.totalRow):
+            if(board[row][0]=='O'):
+                bfsQueue.append([row,0])
+            if(board[row][self.totalCol-1]=='O'):
+                bfsQueue.append([row,self.totalCol-1])
         # we started the loop here from 1 to totalCol -1 so that we don't add the corner element twice
-        for i in range(1,self.totalCol-1):
-            if(board[0][i]=='O'):
-                bfsQueue.append([0,i])
-            if(board[self.totalRow-1][i]=='O'):
-                bfsQueue.append([self.totalRow-1,i])
+        for col in range(1,self.totalCol-1):
+            if(board[0][col]=='O'):
+                bfsQueue.append([0,col])
+            if(board[self.totalRow-1][col]=='O'):
+                bfsQueue.append([self.totalRow-1,col])
 
         # BFS starts here 
         # we marked all the Os that are connected to some boundary O
@@ -54,13 +65,12 @@ class Solution:
                             bfsQueue.append([x[0]+dx[i],x[1]+dy[i]])
 
         # we changed all the O that can not be visited from any boundary O 
-        for i in range(0,self.totalRow):
-            for j in range(0,self.totalCol):
-                if(board[i][j]=='O'):
-                    board[i][j]='X'
-                if(board[i][j]=='*'):
-                    board[i][j]='O'
-
+        for row in range(0,self.totalRow):
+            for col in range(0,self.totalCol):
+                if(board[row][col]=='O'):
+                    board[row][col]='X'
+                if(board[row][col]=='*'):
+                    board[row][col]='O'
 
             
 def main():
@@ -72,10 +82,10 @@ def main():
     # taking input board 
     for i in range(totalRow):
         board.append(input().split(" "))
-
+        
     # Creating the solution object
     solutionObject= Solution(totalRow,totalCol)
-    solutionObject.solve(board)
+    solutionObject.flipBoard(board)
     print(board)
 
 
